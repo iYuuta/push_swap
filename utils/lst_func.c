@@ -9,6 +9,11 @@ t_stack	*ft_ft_lstnew(int content)
 		return (NULL);
 	strc->data = content;
 	strc->next = NULL;
+	strc->above_median = 0;
+	strc->target_node = NULL;
+	strc->cheapest = 0;
+	strc->index = 0;
+	strc->push_cost = 0;
 	return (strc);
 }
 
@@ -30,10 +35,17 @@ void	ft_ft_lstadd_back(t_stack **lst, t_stack *new)
 	if (temp)
 	{
 		temp->next = new;
-		return ;
+		new->prev = temp;
+		new->index = temp->index + 1;
 	}
-	*lst = new;
+	else
+	{
+		*lst = new;
+		new->prev = NULL;
+		new->index = 0;
+	}
 }
+
 
 int	ft_ft_lstsize(t_stack *lst)
 {

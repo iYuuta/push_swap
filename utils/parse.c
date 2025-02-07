@@ -108,6 +108,9 @@ t_stack *ft_parse_em(int ac, char **av)
         int k = 0;
         while (args1[i][k])
         {
+            
+            if (ft_strlen(args1[i][k]) > 11)
+                return (free_mem(args1), write(2, "Error\n", 7), NULL);
             tmp = ft_ft_lstnew(ft_atoi(args1[i][k]));
             ft_ft_lstadd_back(&head, tmp);
             k++;

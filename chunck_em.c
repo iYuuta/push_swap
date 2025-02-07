@@ -43,8 +43,6 @@ int *get_chunks(t_stack *stack, int size)
     }
     i = 0;
     sort_arr(&arr, size);
-    while (i < size)
-        printf("%d, ", arr[i++]);
     return arr;
 }
 
@@ -63,6 +61,18 @@ int get_largest(t_stack *a)
     }
     return (t);
 }
+
+int is_in_chunk(int *arr, int nb, int y, int x)
+{
+    while (y < x)
+    {
+        if (nb == arr[y])
+            return (1);
+        y++;
+    }
+    return (0);
+}
+
 void chunk_sort(t_stack **stack1, t_stack **stack2)
 {
     int chunk_size;
@@ -70,12 +80,32 @@ void chunk_sort(t_stack **stack1, t_stack **stack2)
     int *arr;
     int i;
     int j;
+    int k;
 
     stack_size = ft_ft_lstsize(*stack1);
-    if (ft_ft_lstsize(*stack1) < 200)
+    if (stack_size < 200)
         chunk_size = stack_size / 10;
     else
         chunk_size = stack_size / 5;
+
     arr = get_chunks(*stack1, stack_size);
-    while (i < )
+    j = chunk_size;
+    printf("chunk_size: %d\n", chunk_size);
+    k = 0;
+    i = 0;
+    while (i < stack_size)
+    {
+        while (k < j && i < stack_size)
+        {
+            if (is_in_chunk(arr, (*stack1)->data, i, j))
+            {
+                pa_pb(stack1, stack2, "pb\n");
+                k++;
+            }
+            else
+                ra_rb(stack1, "ra\n");
+        }
+        j += chunk_size;
+    }
+    free(arr);
 }

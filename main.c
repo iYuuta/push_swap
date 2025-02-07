@@ -1,6 +1,12 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+void	ft_error(void)
+{	
+	write (2, "Error\n", 6);
+	exit(1);
+}
+
 int get_smallest(t_stack *a)
 {
     int     t;
@@ -17,16 +23,12 @@ int get_smallest(t_stack *a)
     return (t);
 }
 
-
-
 int main(int ac, char **av)
 {
     t_stack *stack1;
     t_stack *stack2 = NULL;
     int len;
 
-    if (ac < 2)
-        return (write(1, "Error\n", 7), 0);
     if (!check_args(av, ac))
         return (0);
     stack1 = ft_parse_em(ac, av);
@@ -35,7 +37,7 @@ int main(int ac, char **av)
     if (!check_sorted(stack1))
         return (0);
     len = ft_ft_lstsize(stack1);
-    if (len < 3 && get_smallest(stack1) != stack1->data)
+    if (len == 2)
         sa_sb(&stack1, "sa\n");
     else if (len == 3)
         sort_three(&stack1);
@@ -45,15 +47,15 @@ int main(int ac, char **av)
         sort_less_than_10(&stack1, &stack2);
     else if (len <= 100)
         chunk_sort(&stack1, &stack2);
-    // while (stack1)
-    // {
-    //     if (!stack1->next)
-    //     {
-    //         printf("%d\n", stack1->data);
-    //         break;
-    //     }
-    //     printf("%d, ", stack1->data);
-    //     stack1 = stack1->next;
-    // }
+    while (stack1)
+    {
+        if (!stack1->next)
+        {
+            printf("%d\n", stack1->data);
+            break;
+        }
+        printf("%d, ", stack1->data);
+        stack1 = stack1->next;
+    }
     return (0);
 }

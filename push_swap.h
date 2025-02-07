@@ -3,14 +3,22 @@
 
 #include "libft/libft.h"
 #include <stdio.h>
+#include <limits.h>
 
 
 typedef struct s_stack
 {
 	int			    data;
+	int					index;
+	int					push_cost;
+	int				above_median;
+	int				cheapest;
+	struct s_stack	*target_node;
 	struct s_stack	*next;
+	struct s_stack	*prev;
 }			t_stack;
 
+void	ft_error(void);
 int check_sorted(t_stack *stack);
 void sort_five(t_stack **stack1, t_stack **stack2);
 void    sort_less_than_10(t_stack **stack1, t_stack **stack2);
@@ -31,5 +39,6 @@ void sa_sb(t_stack **stack, char *str);
 void pa_pb(t_stack **a, t_stack **b, char *str);
 void ra_rb(t_stack **stack, char *str);
 void rr_ab(t_stack **stack, char *str);
+void	ft_error(void);
 
 #endif

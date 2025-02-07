@@ -3,11 +3,15 @@
 void sa_sb(t_stack **stack, char *str)
 {
     int tmp;
+    t_stack *temp;
 
     if (*stack && (*stack)->next)
     {
+        temp = (*stack)->prev;
         tmp = (*stack)->data;
         (*stack)->data = (*stack)->next->data;
+        (*stack)->prev = (*stack)->next->prev;
+        (*stack)->next->prev = temp;
         (*stack)->next->data = tmp;
     }
     if (str)
@@ -22,8 +26,13 @@ void pa_pb(t_stack **stack1, t_stack **stack2, char *str)
         return;
     tmp = *stack1;
     *stack1 = (*stack1)->next;
+    if (*stack1)
+        (*stack1)->prev = NULL;
     tmp->next = *stack2;
+    if (*stack2)
+        (*stack2)->prev = tmp;
     *stack2 = tmp;
+    tmp->prev = NULL;
     if (str)
         write(1, str, 3);
 }
@@ -38,7 +47,9 @@ void ra_rb(t_stack **stack, char *str)
     tmp = *stack;
     last = ft_ft_lstlast(*stack);
     *stack = (*stack)->next;
+    (*stack)->prev = NULL;
     last->next = tmp;
+    tmp->prev = last;
     tmp->next = NULL;
     if (str)
         write(1, str, 3);
@@ -58,7 +69,9 @@ void rr_ab(t_stack **stack, char *str)
     tmp = tmp->next;
     nd_last->next = NULL;
     tmp->next = *stack;
+    (*stack)->prev = tmp;
     *stack = tmp;
+    tmp->prev = NULL;
     if (str)
         write(1, str, 4);
 }
