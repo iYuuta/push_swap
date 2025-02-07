@@ -11,14 +11,25 @@ typedef struct s_stack
 	struct s_stack	*next;
 }			t_stack;
 
+int check_sorted(t_stack *stack);
+void sort_five(t_stack **stack1, t_stack **stack2);
+void    sort_less_than_10(t_stack **stack1, t_stack **stack2);
+void sort_three(t_stack **stack1);
+int get_smallest(t_stack *a);
+void sort_five(t_stack **stack1, t_stack **stack2);
+void    sort_less_than_10(t_stack **stack1, t_stack **stack2);
+void sort_three(t_stack **stack1);
 t_stack *ft_parse_em(int ac, char **av);
 void	ft_ft_lstadd_front(t_stack **lst, t_stack *new);
+t_stack  *ft_ft_lstnew(int content);
 int	ft_ft_lstsize(t_stack *lst);
 t_stack	*ft_ft_lstlast(t_stack *lst);
+void chunk_sort(t_stack **stack_a, t_stack **stack_b);
 void	ft_ft_lstadd_back(t_stack **lst, t_stack *new);
-void sa_sb(t_stack **stack, int M);
-void pa_pb(t_stack **a, t_stack **b, int M);
-void ra_rb(t_stack **stack, int M);
-void rr_ab(t_stack **stack, int M);
+int check_args(char **str, int index);
+void sa_sb(t_stack **stack, char *str);
+void pa_pb(t_stack **a, t_stack **b, char *str);
+void ra_rb(t_stack **stack, char *str);
+void rr_ab(t_stack **stack, char *str);
 
 #endif

@@ -17,26 +17,7 @@ int get_smallest(t_stack *a)
     return (t);
 }
 
-void    sort_less_than_10(t_stack **a, t_stack **b)
-{
-    int t;
-    t_stack *temp;
 
-    while (*a)
-    {
-        t = get_smallest(*a);
-        temp = *a;
-        while (temp->data != t)
-        {
-            ra_rb(a, 1);
-            temp = *a;
-        }
-        pa_pb(b, a, 2);
-    }
-
-    while (*b)
-        pa_pb(a, b, 1);
-}
 
 int main(int ac, char **av)
 {
@@ -45,22 +26,34 @@ int main(int ac, char **av)
     int len;
 
     if (ac < 2)
+        return (write(1, "Error\n", 7), 0);
+    if (!check_args(av, ac))
         return (0);
     stack1 = ft_parse_em(ac, av);
     if (!stack1)
         return (0);
+    if (!check_sorted(stack1))
+        return (0);
     len = ft_ft_lstsize(stack1);
-    if (len < 10)
+    if (len < 3 && get_smallest(stack1) != stack1->data)
+        sa_sb(&stack1, "sa\n");
+    else if (len == 3)
+        sort_three(&stack1);
+    else if (len <= 5)
+        sort_five(&stack1, &stack2);
+    else if (len < 10)
         sort_less_than_10(&stack1, &stack2);
-    while (stack1)
-    {
-        if (!stack1->next)
-        {
-            printf("%d\n", stack1->data);
-            break;
-        }
-        printf("%d, ", stack1->data);
-        stack1 = stack1->next;
-    }
+    else if (len <= 100)
+        chunk_sort(&stack1, &stack2);
+    // while (stack1)
+    // {
+    //     if (!stack1->next)
+    //     {
+    //         printf("%d\n", stack1->data);
+    //         break;
+    //     }
+    //     printf("%d, ", stack1->data);
+    //     stack1 = stack1->next;
+    // }
     return (0);
 }

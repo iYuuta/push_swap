@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void sa_sb(t_stack **stack, int M)
+void sa_sb(t_stack **stack, char *str)
 {
     int tmp;
 
@@ -10,32 +10,25 @@ void sa_sb(t_stack **stack, int M)
         (*stack)->data = (*stack)->next->data;
         (*stack)->next->data = tmp;
     }
-    if (M == 1)
-        write(1, "sa\n", 3);
-    if (M == 2)
-        write(1, "sb\n", 3);
-    if (M == 3)
-        write(1, "sa\n", 3);
+    if (str)
+        write(1, str, 3);
 }
 
-void pa_pb(t_stack **a, t_stack **b, int M)
+void pa_pb(t_stack **stack1, t_stack **stack2, char *str)
 {
-    t_stack *last;
     t_stack *tmp;
 
-    if (!*b)
+    if (!stack1 || !*stack1)
         return;
-    tmp = *b;
-    *b = (*b)->next;
-    tmp->next = *a;
-    *a = tmp;
-    if (M == 1)
-        write(1, "pa\n", 3);
-    if (M == 2)
-        write(1, "pb\n", 3);
+    tmp = *stack1;
+    *stack1 = (*stack1)->next;
+    tmp->next = *stack2;
+    *stack2 = tmp;
+    if (str)
+        write(1, str, 3);
 }
 
-void ra_rb(t_stack **stack, int M)
+void ra_rb(t_stack **stack, char *str)
 {
     t_stack *tmp;
     t_stack *last;
@@ -47,15 +40,11 @@ void ra_rb(t_stack **stack, int M)
     *stack = (*stack)->next;
     last->next = tmp;
     tmp->next = NULL;
-    if (M == 1)
-        write(1, "ra\n", 3);
-    if (M == 2)
-        write(1, "rb\n", 3);
-    if (M == 3)
-        write(1, "rr\n", 3);
+    if (str)
+        write(1, str, 3);
 }
 
-void rr_ab(t_stack **stack, int M)
+void rr_ab(t_stack **stack, char *str)
 {
     t_stack *tmp;
     t_stack *nd_last;
@@ -70,10 +59,6 @@ void rr_ab(t_stack **stack, int M)
     nd_last->next = NULL;
     tmp->next = *stack;
     *stack = tmp;
-    if (M == 1)
-        write(1, "rra\n", 4);
-    if (M == 2)
-        write(1, "rrb\n", 4);
-    if (M == 3)
-        write(1, "rrr\n", 4);
+    if (str)
+        write(1, str, 4);
 }
