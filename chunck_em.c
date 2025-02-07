@@ -1,5 +1,53 @@
 #include "push_swap.h"
 
+void sort_arr(int **arr, int size)
+{
+    int i;
+    int j;
+    int tmp1;
+
+    i = 0;
+    while (i < size - 1)
+    {
+        j = i + 1;
+        while (j < size)
+        {
+            if ((*arr)[i] > (*arr)[j])
+            {
+                tmp1 = (*arr)[i];
+                (*arr)[i] = (*arr)[j];
+                (*arr)[j] = tmp1;
+            }
+            j++;
+        }
+        i++;
+    }
+}
+
+int *get_chunks(t_stack *stack, int size)
+{
+    int *arr;
+    int i;
+    t_stack *tmp;
+
+    arr = malloc(sizeof(int) * size);
+    if (!arr)
+        return (0);
+    tmp = stack;
+    i = 0;
+    while (tmp && i < size)
+    {
+        arr[i] = tmp->data;
+        tmp = tmp->next;
+        i++;
+    }
+    i = 0;
+    sort_arr(&arr, size);
+    while (i < size)
+        printf("%d, ", arr[i++]);
+    return arr;
+}
+
 int get_largest(t_stack *a)
 {
     int     t;
@@ -15,38 +63,19 @@ int get_largest(t_stack *a)
     }
     return (t);
 }
-void chunk_sort(t_stack **stack_a, t_stack **stack_b)
+void chunk_sort(t_stack **stack1, t_stack **stack2)
 {
     int chunk_size;
-    int len = ft_ft_lstsize(*stack_a);
-    int num_chunks = 3;  // Divide the stack into 3 chunks
-    chunk_size = len / num_chunks;  // Determine size of each chunk (adjust if necessary)
+    int stack_size;
+    int *arr;
+    int i;
+    int j;
 
-    // Iterate through the chunks
-    while (*stack_a)
-    {
-        // Define the chunk range (this is just an example, adjust for your logic)
-        int smallest = get_smallest(*stack_a);  
-        int largest = get_largest(*stack_a);  
-
-        // Move the elements into stack_b until we have a chunk
-        while (*stack_a && (*stack_a)->data <= largest && (*stack_a)->data >= smallest)
-        {
-            pa_pb(stack_b, stack_a, "pb\n");
-        }
-
-        // Sort the chunk in stack_b
-        int chunk_len = ft_ft_lstsize(*stack_b);
-        
-        if (chunk_len > 3 && chunk_len <= 5)
-            sort_five(stack_b, stack_a);  // Sort the chunk using your 3-5 function
-        else if (chunk_len >= 6 && chunk_len <= 9)
-            sort_less_than_10(stack_b, stack_a);  // Sort the chunk using your 6-9 function
-
-        // Push the sorted chunk back to stack_a
-        while (*stack_b)
-        {
-            pa_pb(stack_a, stack_b, "pa\n");
-        }
-    }
+    stack_size = ft_ft_lstsize(*stack1);
+    if (ft_ft_lstsize(*stack1) < 200)
+        chunk_size = stack_size / 10;
+    else
+        chunk_size = stack_size / 5;
+    arr = get_chunks(*stack1, stack_size);
+    while (i < )
 }
