@@ -9,13 +9,9 @@
 typedef struct s_stack
 {
 	int			    data;
-	int					index;
-	int					push_cost;
-	int				above_median;
-	int				cheapest;
-	struct s_stack	*target_node;
+	int				index;
+	int				chunk_index;
 	struct s_stack	*next;
-	struct s_stack	*prev;
 }			t_stack;
 
 void	ft_error(void);

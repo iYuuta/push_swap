@@ -45,17 +45,17 @@ int main(int ac, char **av)
         sort_five(&stack1, &stack2);
     else if (len < 10)
         sort_less_than_10(&stack1, &stack2);
-    else if (len <= 100)
+    else
         chunk_sort(&stack1, &stack2);
-    while (stack1)
-    {
-        if (!stack1->next)
-        {
-            printf("%d\n", stack1->data);
-            break;
-        }
-        printf("%d, ", stack1->data);
-        stack1 = stack1->next;
-    }
-    return (0);
+    // while (stack1)
+    // {
+    //     // if (!stack1->next)
+    //     // {
+    //     //     printf("index->%d  :position->%d  :number->%d\n", stack1->index, stack1->chunk_index, stack1->data);
+    //     //     break;
+    //     // }
+    //     // printf("index->%d  :position->%d  :number->%d\n", stack1->index, stack1->chunk_index, stack1->data);
+    //     printf("%d, ", stack1->data);
+    //     stack1 = stack1->next;
+    // }
 }
