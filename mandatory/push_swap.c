@@ -1,0 +1,27 @@
+#include "../push_swap.h"
+
+int main(int ac, char **av)
+{
+	t_stack *stack1;
+	t_stack *stack2 = NULL;
+	int len;
+
+	if (!check_args(av, ac))
+		return (0);
+	stack1 = ft_parse_em(ac, av);
+	if (!stack1)
+		return (0);
+	if (!check_sorted(stack1))
+		return (0);
+	len = ft_ft_lstsize(stack1);
+	if (len == 2)
+		sa_sb(&stack1, "sa\n");
+	else if (len == 3)
+		sort_three(&stack1);
+	else if (len <= 5)
+		sort_five(&stack1, &stack2);
+	else if (len < 10)
+		sort_less_than_10(&stack1, &stack2);
+	else
+		sorting_algo(&stack1, &stack2);
+}

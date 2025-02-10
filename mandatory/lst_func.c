@@ -8,18 +8,14 @@ t_stack	*ft_ft_lstnew(int content)
 	if (!strc)
 		return (NULL);
 	strc->data = content;
-	strc->next = NULL;
 	strc->index = 0;
-	strc->chunk_index = 0;
+	strc->above_median = 0;
+	strc->cheapest = 0;
+	strc->push_cost = 0;
+	strc->target = NULL;
+	strc->next = NULL;
+	strc->prev = NULL;
 	return (strc);
-}
-
-void	ft_ft_lstadd_front(t_stack **lst, t_stack *new)
-{
-	if (!lst || !new)
-		return ;
-	new->next = *lst;
-	*lst = new;
 }
 
 void	ft_ft_lstadd_back(t_stack **lst, t_stack *new)
@@ -32,15 +28,17 @@ void	ft_ft_lstadd_back(t_stack **lst, t_stack *new)
 	if (temp)
 	{
 		temp->next = new;
+		new->prev = temp;
 		new->index = temp->index + 1;
 	}
 	else
 	{
 		*lst = new;
+		new->next = NULL;
+		new->prev = NULL;
 		new->index = 0;
 	}
 }
-
 
 int	ft_ft_lstsize(t_stack *lst)
 {
