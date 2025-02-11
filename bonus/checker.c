@@ -3,7 +3,7 @@
 void    ft_error(void)
 {
     write(2, "Error\n", 7);
-    exit(0);
+    exit(1);
 }
 
 void free_mem(char ***ptr)

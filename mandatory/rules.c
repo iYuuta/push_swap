@@ -1,4 +1,4 @@
-#include "../push_swap.h"
+#include "push_swap.h"
 
 void sa_sb(t_stack **stack, char *str)
 {

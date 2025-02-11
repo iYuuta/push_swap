@@ -32,7 +32,7 @@ $(BNAME) : $(BOBJ) $(LBFTOBJ)
 libft/%.o : libft/%.c libft/libft.h
 	$(CCFLAGS) -c $< -o $@
 
-mandatory/%.o : mandatory/%.c push_swap.h
+mandatory/%.o : mandatory/%.c mandatory/push_swap.h
 	$(CCFLAGS) -c $< -o $@
 
 bonus/%.o : bonus/%.c bonus/checker.h

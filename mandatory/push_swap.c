@@ -1,18 +1,18 @@
-#include "../push_swap.h"
+#include "push_swap.h"
 
 int main(int ac, char **av)
 {
 	t_stack *stack1;
-	t_stack *stack2 = NULL;
+	t_stack *stack2;
 	int len;
 
 	if (!check_args(av, ac))
-		return (0);
+		return (1);
 	stack1 = ft_parse_em(ac, av);
 	if (!stack1)
-		return (0);
+		return (1);
 	if (!check_sorted(stack1))
-		return (0);
+		return (1);
 	len = ft_ft_lstsize(stack1);
 	if (len == 2)
 		sa_sb(&stack1, "sa\n");
