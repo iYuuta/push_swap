@@ -54,8 +54,16 @@ void	final_check(t_stack **stack)
 	t_stack	*tmp;
 
 	tmp = find_smallest_value(*stack);
-	while (*stack != tmp)
-		rr_ab(stack, "rra\n");
+	if (tmp->above_median == 1)
+	{
+		while (*stack != tmp)
+			ra_rb(stack, "ra\n");
+	}
+	else if (tmp->above_median == 0)
+	{
+		while (*stack != tmp)
+			rr_ab(stack, "rra\n");
+	}
 }
 
 void	update_nodes_b(t_stack **stack1, t_stack **stack2)
