@@ -1,11 +1,5 @@
 #include "checker.h"
 
-void    ft_error(void)
-{
-    write(2, "Error\n", 7);
-    exit(1);
-}
-
 void free_mem(char ***ptr)
 {
     int    i;
@@ -58,7 +52,7 @@ int check_move(char *str, char *move)
 	return (0);
 }
 
-void	preform_move(char *str, t_stack **stack1, t_stack **stack2)
+int	preform_move(char *str, t_stack **stack1, t_stack **stack2)
 {
 	if (check_move(str, "pa\n"))
 		pa_pb(stack2, stack1, NULL);
@@ -83,7 +77,8 @@ void	preform_move(char *str, t_stack **stack1, t_stack **stack2)
 	else if (check_move(str, "rrr\n"))
 		double_move(stack1, stack2, 3);
 	else
-		printf("Error\n");
+		return(write(2, "Error\n", 6), 0);
+	return (1);
 }
 
 int main(int ac, char **av)
@@ -92,16 +87,25 @@ int main(int ac, char **av)
 	t_stack *stack1;
 	t_stack *stack2;
 
+	stack2 = NULL;
+	if (ac < 2)
+		return (0);
+	if (!check_args(av, ac) || !check_string(ac, av))
+		return (write(1, "Error\n", 6), 1);
 	stack1 = ft_parse(ac, av);
+	if (!stack1)
+		return (1);
 	str = get_next_line(0);
 	while (str)
 	{
-		preform_move(str, &stack1, &stack2);
+		if (!preform_move(str, &stack1, &stack2))
+			return (free(str), 1);
 		free(str);
 		str = get_next_line(0);
 	}
 	if (ft_ft_lstsize(stack2) != 0 || check_if_sorted(stack1))
-		printf("KO\n");
+		write(1, "KO\n", 3);
 	else if (!check_if_sorted(stack1))
-		printf("OK\n");
+		write(1, "OK\n", 3);
+	return (clear_stack(stack1, stack2), 0);
 }

@@ -16,57 +16,6 @@ int	check_sorted(t_stack *stack)
 	return (0);
 }
 
-int	check_args(char **str, int index)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (++i < index)
-	{
-		j = -1;
-		if (str[i][0] == '\0')
-			return (write(2, "Error\n", 7), 0);
-		while (str[i][++j])
-		{
-		if ((str[i][j] < '0' || str[i][j] > '9') && str[i][j] != ' '
-			&& str[i][j] != '-' && str[i][j] != '+')
-				return (write(2, "Error\n", 7), 0);
-			if (j > 0 && str[i][j - 1] && (str[i][j] == '-'
-				|| str[i][j] == '+') && str[i][j - 1] != ' ')
-				return (write(2, "Error\n", 7), 0);
-			if ((str[i][j] == '-' || str[i][j] == '+')
-				&& (!str[i][++j] || str[i][j] < '0' || str[i][j] > '9'))
-				return (write(2, "Error\n", 7), 0);
-		}
-	}
-	return (1);
-}
-
-int	check_dup(t_stack *stack)
-{
-	t_stack	*tmp;    
-	t_stack	*head;
-	int		data1;
-	int		data2;
-
-	head = stack;
-	while (head)
-	{
-		tmp = head->next;
-		data1 = head->data;
-		while (tmp)
-		{
-			data2 = tmp->data;
-			if (data1 == data2)
-				return (0);
-			tmp = tmp->next;
-		}
-		head = head->next;
-	}
-	return (1);
-}
-
 char	***get_args(int ac, char **av, int *j)
 {
     int		i;
@@ -114,5 +63,5 @@ t_stack	*ft_parse_em(int ac, char **av)
 	}
 	if (!check_dup(head))
 		return (write(2, "Error\n", 7), NULL);
-	return (head);
+	return (free_mem(args1), head);
 }

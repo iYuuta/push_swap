@@ -19,7 +19,10 @@ typedef struct s_stack
 }			t_stack;
 
 void	ft_error(void);
+void	clear_stack(t_stack *stack);
+int		check_string(int ac, char **av);
 void	free_mem(char ***ptr);
+int		check_dup(t_stack *stack);
 int		check_sorted(t_stack *stack);
 void	sort_five(t_stack **stack1, t_stack **stack2);
 void	sort_less_than_10(t_stack **stack1, t_stack **stack2);

@@ -24,6 +24,10 @@ typedef struct s_stack
 	struct s_stack	*prev;
 }			t_stack;
 
+void	clear_stack(t_stack *stack1, t_stack *stack2);
+int		check_string(int ac, char **av);
+int		check_args(char **str, int index);
+int		check_dup(t_stack *stack);
 char	*duplicate(char *str);
 void	*free_em(char **ptr1, char **ptr2);
 void	free_mem(char ***ptr);

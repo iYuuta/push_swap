@@ -21,17 +21,17 @@ void free_mem(char ***ptr)
     int    i;
     int    j;
 
-    if (ptr == NULL || *ptr == NULL)
+    if (*ptr == NULL || **ptr == NULL || ptr == NULL)
         return;
     i = -1;
     while (ptr[++i])
     {
         j = -1;
-        while (ptr[i][++j])
+        while (ptr[i] && ptr[i][++j])
             free(ptr[i][j]);
         free(ptr[i]);
     }
-    free(ptr);
+	free(ptr);
 }
 
 void	rotate_both(t_stack **stack1, t_stack **stack2, t_stack *cheapest)

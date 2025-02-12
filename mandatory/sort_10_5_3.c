@@ -1,11 +1,5 @@
 #include "push_swap.h"
 
-void    ft_error(void)
-{
-    write(2, "Error\n", 7);
-    exit(0);
-}
-
 void sort_three(t_stack **stack1)
 {
 	if ((*stack1)->next->data == get_smallest(*stack1) && (*stack1)->data < (*stack1)->next->next->data)
