@@ -13,8 +13,8 @@ void	clear_stack(t_stack *stack)
 }
 void    ft_error(void)
 {
-    write(2, "Error\n", 7);
-    exit(1);
+    write(2, "Error\n", 6);
+    exit(0);
 }
 
 int check_string(int ac, char **av)

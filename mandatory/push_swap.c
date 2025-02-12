@@ -9,7 +9,7 @@ int main(int ac, char **av)
 	if (ac < 2)
 		return (0);
 	if (!check_args(av, ac) || !check_string(ac, av))
-		return (write(2, "Error\n", 7), 1);
+		return (write(2, "Error\n", 6), 1);
 	stack1 = ft_parse_em(ac, av);
 	if (!stack1)
 		return (1);
