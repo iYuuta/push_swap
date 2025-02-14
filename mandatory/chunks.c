@@ -1,19 +1,5 @@
 #include "push_swap.h"
 
-t_stack *get_last_node(t_stack *stack)
-{
-	t_stack *tmp;
-
-	tmp = stack;
-	while (stack)
-	{
-		if (stack->sorted_index > tmp->sorted_index)
-			tmp = stack;
-		stack = stack->next;
-	}
-	return (tmp);
-}
-
 void	sort_em(t_stack **stack1, t_stack **stack2)
 {
 	t_stack	*tmp;
@@ -21,7 +7,7 @@ void	sort_em(t_stack **stack1, t_stack **stack2)
 	while (ft_ft_lstsize(*stack2))
 	{
 		update_position(*stack2);
-		tmp = get_last_node(*stack2);
+		tmp = get_biggest_node(*stack2);
 		while (*stack2 != tmp)
 		{
 			if (tmp->above_median == 1)
@@ -33,7 +19,7 @@ void	sort_em(t_stack **stack1, t_stack **stack2)
 	}
 }
 
-void	retarded_update_index(t_stack *lst)
+void	update_index(t_stack *lst)
 {
 	t_stack	*head;
 	t_stack	*tmp;
@@ -53,15 +39,33 @@ void	retarded_update_index(t_stack *lst)
 	}
 }
 
-void	chunk_em(t_stack **stack1, t_stack **stack2)
+void	final_check(t_stack **stack)
+{
+	t_stack	*tmp;
+
+	tmp = find_smallest_value(*stack);
+	if (tmp->above_median == 1)
+	{
+		while (*stack != tmp)
+			ra_rb(stack, "ra\n");
+	}
+	else if (tmp->above_median == 0)
+	{
+		while (*stack != tmp)
+			rr_ab(stack, "rra\n");
+	}
+}
+
+void	cut_em(t_stack **stack1, t_stack **stack2, int chunk_size)
 {
 	int	i;
+	int	direction;
 	int	size;
-	int	*arr;
-	
-	size = ft_ft_lstsize(*stack1);
+
 	i = 0;
-	retarded_update_index(*stack1);
+	size = ft_ft_lstsize(*stack1);
+	direction = check_biggest_subsequence(*stack1);
+	update_index(*stack1);
 	while (*stack1)
 	{
 		if ((*stack1)->sorted_index <= i)
@@ -69,15 +73,29 @@ void	chunk_em(t_stack **stack1, t_stack **stack2)
 			pa_pb(stack1, stack2, "pb\n");
 			i++;
 		}
-		else if ((*stack1)->sorted_index < i + 34)
+		else if ((*stack1)->sorted_index < i + chunk_size)
 		{
 			pa_pb(stack1, stack2, "pb\n");
 			ra_rb(stack2, "rb\n");
 			i++;
 		}
+		else if (direction >= size / 3)
+			rr_ab(stack1, "rra\n");
 		else
-		 	ra_rb(stack1, "ra\n");
+			ra_rb(stack1, "ra\n");
 	}
+}
+
+void	chunk_em(t_stack **stack1, t_stack **stack2)
+{
+	int	size;
+	int	chunk_size;
+
+	chunk_size = 20;
+	size = ft_ft_lstsize(*stack1);
+	if (size > 200)
+		chunk_size = 35;
+	cut_em(stack1, stack2, chunk_size);
 	sort_em(stack1, stack2);
 	final_check(stack1);
 }

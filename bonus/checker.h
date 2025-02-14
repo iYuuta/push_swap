@@ -1,11 +1,11 @@
 #ifndef CHECKER_H
-#define CHECKER_H
+# define CHECKER_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5
 # endif
 
-#include "../libft/libft.h"
+# include "../libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -24,7 +24,7 @@ typedef struct s_stack
 	struct s_stack	*prev;
 }			t_stack;
 
-void    ft_error(void);
+void	ft_error(void);
 int		ft_atoi(const char *str, t_stack *stack);
 void	clear_stack(t_stack *stack1, t_stack *stack2);
 int		check_string(int ac, char **av);

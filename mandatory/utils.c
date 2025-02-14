@@ -1,77 +1,93 @@
 #include "push_swap.h"
 
-int get_smallest(t_stack *a)
+int	check_biggest_subsequence(t_stack *stack)
 {
-    int     t;
-    t_stack *temp;
+	int	descending;
+	int	i;
 
-    temp = a;
-    t = a->data;
-    while (temp)
-    {
-        if (t > temp->data)
-            t = temp->data;
-        temp = temp->next;
-    }
-    return (t);
+	i = 0;
+	descending = 0;
+	while (i < ft_ft_lstsize(stack) / 2)
+	{
+		if (stack->next && stack->data > stack->next->data)
+			descending++;
+		else
+			descending--;
+		i++;
+		stack = stack->next;
+	}
+	return (descending);
 }
 
-void free_mem(char ***ptr)
+void	free_mem(char ***ptr)
 {
-    int    i;
-    int    j;
+	int	i;
+	int	j;
 
-    if (*ptr == NULL || **ptr == NULL || ptr == NULL)
-        return;
-    i = -1;
-    while (ptr[++i])
-    {
-        j = -1;
-        while (ptr[i] && ptr[i][++j])
-            free(ptr[i][j]);
-        free(ptr[i]);
-    }
+	if (*ptr == NULL || **ptr == NULL || ptr == NULL)
+		return ;
+	i = -1;
+	while (ptr[++i])
+	{
+		j = -1;
+		while (ptr[i] && ptr[i][++j])
+			free(ptr[i][j]);
+		free(ptr[i]);
+	}
 	free(ptr);
 }
 
-void	rotate_both(t_stack **stack1, t_stack **stack2, t_stack *cheapest)
+void	update_position(t_stack *stack)
 {
-	while (*stack2 != cheapest->target && *stack1 != cheapest)
-	{
-		ra_rb(stack1, "rr\n");
-		ra_rb(stack2, NULL);
-	}
-	update_position(*stack1);
-	update_position(*stack2);
-}
-
-void	rev_rotate_both(t_stack **stack1, t_stack **stack2, t_stack *cheapest)
-{
-	while (*stack2 != cheapest->target && *stack1 != cheapest)
-	{
-		rr_ab(stack1, "rrr\n");
-		rr_ab(stack2, NULL);
-	}
-	update_position(*stack1);
-	update_position(*stack2);
-}
-
-void	find_cheapest(t_stack *stack)
-{
-	long	least_moves;
-	t_stack	*cheapest;
+	int	index;
+	int	median;
 
 	if (!stack)
 		return ;
-	least_moves = LONG_MAX;
+	median = ft_ft_lstsize(stack) / 2;
+	index = 0;
 	while (stack)
 	{
-		if (stack->push_cost < least_moves)
+		stack->index = index;
+		if (index <= median)
+			stack->above_median = 1;
+		else
+			stack->above_median = 0;
+		stack = stack->next;
+		index++;
+	}
+}
+
+t_stack	*find_smallest_value(t_stack *stack)
+{
+	long	min;
+	t_stack	*max_node;
+
+	if (!stack)
+		return (NULL);
+	min = LONG_MAX;
+	while (stack)
+	{
+		if (stack->data < min)
 		{
-			least_moves = stack->push_cost;
-			cheapest = stack;
+			min = stack->data;
+			max_node = stack;
 		}
 		stack = stack->next;
 	}
-	cheapest->cheapest = 1;
+	return (max_node);
+}
+
+t_stack	*get_biggest_node(t_stack *stack)
+{
+	t_stack	*tmp;
+
+	tmp = stack;
+	while (stack)
+	{
+		if (stack->sorted_index > tmp->sorted_index)
+			tmp = stack;
+		stack = stack->next;
+	}
+	return (tmp);
 }

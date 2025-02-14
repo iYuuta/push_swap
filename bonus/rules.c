@@ -1,8 +1,8 @@
 #include "checker.h"
 
-void sa_sb(t_stack **stack, char *str)
+void	sa_sb(t_stack **stack, char *str)
 {
-	int tmp;
+	int	tmp;
 
 	if (*stack && (*stack)->next)
 	{
@@ -14,12 +14,12 @@ void sa_sb(t_stack **stack, char *str)
 		write(1, str, 3);
 }
 
-void pa_pb(t_stack **stack1, t_stack **stack2, char *str)
+void	pa_pb(t_stack **stack1, t_stack **stack2, char *str)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!stack1 || !*stack1)
-		return;
+		return ;
 	tmp = *stack1;
 	*stack1 = (*stack1)->next;
 	if (*stack1)
@@ -33,13 +33,13 @@ void pa_pb(t_stack **stack1, t_stack **stack2, char *str)
 		write(1, str, 3);
 }
 
-void ra_rb(t_stack **stack, char *str)
+void	ra_rb(t_stack **stack, char *str)
 {
-	t_stack *tmp;
-	t_stack *last;
+	t_stack	*tmp;
+	t_stack	*last;
 
 	if (!stack || !(*stack) || !(*stack)->next)
-		return;
+		return ;
 	tmp = *stack;
 	*stack = (*stack)->next;
 	(*stack)->prev = NULL;
@@ -53,13 +53,13 @@ void ra_rb(t_stack **stack, char *str)
 		write(1, str, 3);
 }
 
-void rr_ab(t_stack **stack, char *str)
+void	rr_ab(t_stack **stack, char *str)
 {
-	t_stack *tmp;
-	t_stack *nd_last;
+	t_stack	*tmp;
+	t_stack	*nd_last;
 
 	if (!stack || !(*stack) || !(*stack)->next)
-		return;
+		return ;
 	tmp = *stack;
 	while (tmp->next && tmp->next->next)
 		tmp = tmp->next;

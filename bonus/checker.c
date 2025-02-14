@@ -1,26 +1,26 @@
 #include "checker.h"
 
-void free_mem(char ***ptr)
+void	free_mem(char ***ptr)
 {
-    int    i;
-    int    j;
+	int	i;
+	int	j;
 
-    if (ptr == NULL || *ptr == NULL)
-        return;
-    i = -1;
-    while (ptr[++i])
-    {
-        j = -1;
-        while (ptr[i][++j])
-            free(ptr[i][j]);
-        free(ptr[i]);
-    }
-    free(ptr);
+	if (ptr == NULL || *ptr == NULL)
+		return ;
+	i = -1;
+	while (ptr[++i])
+	{
+		j = -1;
+		while (ptr[i][++j])
+			free(ptr[i][j]);
+		free(ptr[i]);
+	}
+	free(ptr);
 }
 
 int	check_if_sorted(t_stack *stack)
 {
-    int	tmp;
+	int	tmp;
 
 	tmp = stack->data;
 	stack = stack->next;
@@ -34,7 +34,7 @@ int	check_if_sorted(t_stack *stack)
 	return (0);
 }
 
-int check_move(char *str, char *move)
+int	check_move(char *str, char *move)
 {
 	int	i;
 	int	j;
@@ -44,7 +44,7 @@ int check_move(char *str, char *move)
 	while (str[i])
 	{
 		if (str[i] == move[i])
-			j++;	
+			j++;
 		i++;
 	}
 	if (i == j)
@@ -77,15 +77,15 @@ int	preform_move(char *str, t_stack **stack1, t_stack **stack2)
 	else if (check_move(str, "rrr\n"))
 		double_move(stack1, stack2, 3);
 	else
-		return(write(2, "Error\n", 6), 0);
+		return (write(2, "Error\n", 6), 0);
 	return (1);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	char *str;
-	t_stack *stack1;
-	t_stack *stack2;
+	char	*str;
+	t_stack	*stack1;
+	t_stack	*stack2;
 
 	stack2 = NULL;
 	if (ac < 2)
