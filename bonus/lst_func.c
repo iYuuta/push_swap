@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_func.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoayedde <yoayedde@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-02-14 19:48:18 by yoayedde          #+#    #+#             */
+/*   Updated: 2025-02-14 19:48:18 by yoayedde         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
 t_stack	*ft_ft_newlst(int content)
@@ -10,11 +22,8 @@ t_stack	*ft_ft_newlst(int content)
 	strc->data = content;
 	strc->index = 0;
 	strc->above_median = 0;
-	strc->cheapest = 0;
-	strc->push_cost = 0;
-	strc->target = NULL;
+	strc->sorted_index = 0;
 	strc->next = NULL;
-	strc->prev = NULL;
 	return (strc);
 }
 
@@ -28,14 +37,12 @@ void	ft_ft_lstadd_back(t_stack **lst, t_stack *node)
 	if (temp)
 	{
 		temp->next = node;
-		node->prev = temp;
 		node->index = temp->index + 1;
 	}
 	else
 	{
 		*lst = node;
 		node->next = NULL;
-		node->prev = NULL;
 		node->index = 0;
 	}
 }

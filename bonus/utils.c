@@ -1,56 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoayedde <yoayedde@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-14 19:48:10 by yoayedde          #+#    #+#             */
-/*   Updated: 2025-02-14 19:48:10 by yoayedde         ###   ########.fr       */
+/*   Created: 2025-02-14 21:28:46 by yoayedde          #+#    #+#             */
+/*   Updated: 2025-02-14 21:28:46 by yoayedde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-int	check(char *str)
+int	check_if_sorted(t_stack *stack)
 {
-	if (!str)
-		return (0);
-	while (*str)
+	int	tmp;
+
+	tmp = stack->data;
+	stack = stack->next;
+	while (stack)
 	{
-		if (*str == '\n')
+		if (tmp > stack->data)
 			return (1);
-		str++;
+		tmp = stack->data;
+		stack = stack->next;
 	}
 	return (0);
 }
 
-void	*free_em(char	**ptr1, char	**ptr2)
+int	check_move(char *str, char *move)
 {
-	if (ptr1 && *ptr1)
-	{
-		free(*ptr1);
-		*ptr1 = NULL;
-	}
-	if (ptr2 && *ptr2)
-	{
-		free(*ptr2);
-		*ptr2 = NULL;
-	}
-	return (NULL);
-}
+	int	i;
+	int	j;
 
-char	*duplicate(char	*str)
-{
-	char	*s;
-	int		i;
-
-	i = -1;
-	s = malloc(ft_strlen(str) + 1);
-	if (!s)
-		return (NULL);
-	while (str[++i])
-		s[i] = str[i];
-	s[i] = '\0';
-	return (s);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == move[i])
+			j++;
+		i++;
+	}
+	if (i == j)
+		return (1);
+	return (0);
 }

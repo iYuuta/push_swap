@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoayedde <yoayedde@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-02-14 19:52:10 by yoayedde          #+#    #+#             */
+/*   Updated: 2025-02-14 19:52:10 by yoayedde         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -37,7 +49,7 @@ void	chunk_em(t_stack **stack1, t_stack **stack2);
 void	update_position(t_stack *stack);
 t_stack	*find_smallest_value(t_stack *stack);
 t_stack	*get_biggest_node(t_stack *stack);
-int	check_biggest_subsequence(t_stack *stack);
+int		check_biggest_subsequence(t_stack *stack);
 void	clear_stack(t_stack *stack);
 void	free_mem(char ***ptr);
 void	ft_error(void);

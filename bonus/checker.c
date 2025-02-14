@@ -1,89 +1,100 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoayedde <yoayedde@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-02-14 19:47:48 by yoayedde          #+#    #+#             */
+/*   Updated: 2025-02-14 19:47:48 by yoayedde         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-void	free_mem(char ***ptr)
+void	preform_move(int move, t_stack **stack1, t_stack **stack2)
 {
-	int	i;
-	int	j;
-
-	if (ptr == NULL || *ptr == NULL)
-		return ;
-	i = -1;
-	while (ptr[++i])
-	{
-		j = -1;
-		while (ptr[i][++j])
-			free(ptr[i][j]);
-		free(ptr[i]);
-	}
-	free(ptr);
+	if (move == 1)
+		pa_pb(stack2, stack1, NULL);
+	else if (move == 2)
+		pa_pb(stack1, stack2, NULL);
+	else if (move == 3)
+		sa_sb(stack1, NULL);
+	else if (move == 4)
+		sa_sb(stack2, NULL);
+	else if (move == 5)
+		double_move(stack1, stack2, 1);
+	else if (move == 6)
+		ra_rb(stack1, NULL);
+	else if (move == 7)
+		rr_ab(stack1, NULL);
+	else if (move == 8)
+		double_move(stack1, stack2, 2);
+	else if (move == 9)
+		ra_rb(stack2, NULL);
+	else if (move == 10)
+		rr_ab(stack2, NULL);
+	else if (move == 11)
+		double_move(stack1, stack2, 3);
 }
 
-int	check_if_sorted(t_stack *stack)
-{
-	int	tmp;
-
-	tmp = stack->data;
-	stack = stack->next;
-	while (stack)
-	{
-		if (tmp > stack->data)
-			return (1);
-		tmp = stack->data;
-		stack = stack->next;
-	}
-	return (0);
-}
-
-int	check_move(char *str, char *move)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (str[i] == move[i])
-			j++;
-		i++;
-	}
-	if (i == j)
-		return (1);
-	return (0);
-}
-
-int	preform_move(char *str, t_stack **stack1, t_stack **stack2)
+int	store_moves(t_stack *stack, char *str)
 {
 	if (check_move(str, "pa\n"))
-		pa_pb(stack2, stack1, NULL);
+		stack->data = 1;
 	else if (check_move(str, "pb\n"))
-		pa_pb(stack1, stack2, NULL);
+		stack->data = 2;
 	else if (check_move(str, "sa\n"))
-		sa_sb(stack1, NULL);
+		stack->data = 3;
 	else if (check_move(str, "sb\n"))
-		sa_sb(stack2, NULL);
+		stack->data = 4;
 	else if (check_move(str, "ss\n"))
-		double_move(stack1, stack2, 1);
+		stack->data = 5;
 	else if (check_move(str, "ra\n"))
-		ra_rb(stack1, NULL);
+		stack->data = 6;
 	else if (check_move(str, "rra\n"))
-		rr_ab(stack1, NULL);
+		stack->data = 7;
 	else if (check_move(str, "rr\n"))
-		double_move(stack1, stack2, 2);
+		stack->data = 8;
 	else if (check_move(str, "rb\n"))
-		ra_rb(stack2, NULL);
+		stack->data = 9;
 	else if (check_move(str, "rrb\n"))
-		rr_ab(stack2, NULL);
+		stack->data = 10;
 	else if (check_move(str, "rrr\n"))
-		double_move(stack1, stack2, 3);
+		stack->data = 11;
 	else
 		return (write(2, "Error\n", 6), 0);
 	return (1);
 }
 
-int	main(int ac, char **av)
+int	buffer_exe(t_stack **stack1, t_stack **stack2)
 {
 	char	*str;
+	t_stack	*moves;
+	t_stack	*tmp;
+
+	moves = NULL;
+	str = get_next_line(0);
+	while (str)
+	{
+		tmp = ft_ft_newlst(0);
+		ft_ft_lstadd_back(&moves, tmp);
+		if (!store_moves(tmp, str))
+			return (free(str), clear_stack(*stack1, moves), 1);
+		free(str);
+		str = get_next_line(0);
+	}
+	tmp = moves;
+	while (moves && moves->data)
+	{
+		preform_move(moves->data, stack1, stack2);
+		moves = moves->next;
+	}
+	return (clear_stack(tmp, NULL), 0);
+}
+
+int	main(int ac, char **av)
+{
 	t_stack	*stack1;
 	t_stack	*stack2;
 
@@ -95,14 +106,8 @@ int	main(int ac, char **av)
 	stack1 = ft_parse(ac, av);
 	if (!stack1)
 		return (1);
-	str = get_next_line(0);
-	while (str)
-	{
-		if (!preform_move(str, &stack1, &stack2))
-			return (free(str), 1);
-		free(str);
-		str = get_next_line(0);
-	}
+	if (buffer_exe(&stack1, &stack2))
+		return (1);
 	if (ft_ft_lstsize(stack2) != 0 || check_if_sorted(stack1))
 		write(1, "KO\n", 3);
 	else if (!check_if_sorted(stack1))

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoayedde <yoayedde@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-02-14 19:48:22 by yoayedde          #+#    #+#             */
+/*   Updated: 2025-02-14 19:48:22 by yoayedde         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
 int	ft_atoi(const char *str, t_stack *stack)
@@ -27,6 +39,24 @@ int	ft_atoi(const char *str, t_stack *stack)
 		ft_error();
 	}
 	return (result * sign);
+}
+
+void	free_mem(char ***ptr)
+{
+	int	i;
+	int	j;
+
+	if (ptr == NULL || *ptr == NULL)
+		return ;
+	i = -1;
+	while (ptr[++i])
+	{
+		j = -1;
+		while (ptr[i][++j])
+			free(ptr[i][j]);
+		free(ptr[i]);
+	}
+	free(ptr);
 }
 
 int	check_sorted(t_stack *stack)

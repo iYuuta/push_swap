@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoayedde <yoayedde@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-02-14 19:47:57 by yoayedde          #+#    #+#             */
+/*   Updated: 2025-02-14 19:47:57 by yoayedde         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CHECKER_H
 # define CHECKER_H
 
@@ -16,12 +28,9 @@ typedef struct s_stack
 {
 	int				data;
 	int				index;
-	int				push_cost;
+	int				sorted_index;
 	int				above_median;
-	int				cheapest;
-	struct s_stack	*target;
 	struct s_stack	*next;
-	struct s_stack	*prev;
 }			t_stack;
 
 void	ft_error(void);
