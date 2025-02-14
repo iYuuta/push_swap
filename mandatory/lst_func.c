@@ -11,6 +11,7 @@ t_stack	*ft_ft_lstnew(int content)
 	strc->index = 0;
 	strc->above_median = 0;
 	strc->cheapest = 0;
+	strc->sorted_index = 0;
 	strc->push_cost = 0;
 	strc->target = NULL;
 	strc->next = NULL;

@@ -10,6 +10,7 @@ typedef struct s_stack
 {
 	int				data;
 	int				index;
+	int				sorted_index;
 	int				push_cost;
 	int				above_median;
 	int				cheapest;
@@ -51,5 +52,6 @@ void	push_to_a(t_stack **stack1, t_stack **stack2);
 void	update_nodes_a(t_stack *stack1, t_stack *stack2);
 void	update_nodes_b(t_stack **stack1, t_stack **stack2);
 void	check_for_push(t_stack **stack, t_stack *cheapest, int operation);
+void	chunk_em(t_stack **stack1, t_stack **satck2);
 
 #endif
