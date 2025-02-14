@@ -39,12 +39,10 @@ void	set_target_b(t_stack *stack1, t_stack *stack2)
 			}
 			current_a_node = current_a_node->next;
 		}
-
 		if (best_match == LONG_MAX)
 			stack2->target = find_smallest_value(stack1);
 		else
 			stack2->target = target;
-
 		stack2 = stack2->next;
 	}
 }

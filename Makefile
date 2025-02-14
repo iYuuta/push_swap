@@ -1,6 +1,6 @@
 SRC = mandatory/lst_func.c mandatory/parse.c mandatory/push_swap.c mandatory/error_handeling.c \
 		mandatory/push_to_a.c mandatory/push_to_b.c mandatory/rules.c \
-		mandatory/sort_10_5_3.c mandatory/sort_biggie.c mandatory/utils.c \
+		mandatory/sort_three.c mandatory/sort_biggie.c mandatory/utils.c \
 		mandatory/chunks.c
 
 BSRC = bonus/checker.c bonus/get_next_line_utils.c bonus/get_next_line.c \

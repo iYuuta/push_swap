@@ -21,14 +21,9 @@ int main(int ac, char **av)
 		sa_sb(&stack1, "sa\n");
 	else if (len == 3)
 		sort_three(&stack1);
-	// else if (len <= 5)
-	// 	sort_five(&stack1, &stack2);
-	// else if (len < 10)
-		// sort_less_than_10(&stack1, &stack2);
-	// else if (len < 400)
-	else
+	else if (len > 3 && len < 400)
 		sorting_algo(&stack1, &stack2);
-	// else
-	// 	chunk_em(&stack1, &stack2);
+	else
+		chunk_em(&stack1, &stack2);
 	return (clear_stack(stack1), 0);
 }

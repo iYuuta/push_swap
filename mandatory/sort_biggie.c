@@ -79,28 +79,14 @@ void	sorting_algo(t_stack **stack1, t_stack **stack2)
 {
 	int	a_len;
 
-	if (ft_ft_lstsize(*stack1) > 3)
-		pa_pb(stack1, stack2, "pb\n");
-	if (ft_ft_lstsize(*stack1) > 3)
-		pa_pb(stack1, stack2, "pb\n");
 	a_len = ft_ft_lstsize(*stack1);
+	if (a_len > 3)
+		pa_pb(stack1, stack2, "pb\n");
+	if (a_len > 3)
+		pa_pb(stack1, stack2, "pb\n");
 	while (ft_ft_lstsize(*stack1) > 3)
 	{
 		update_nodes_a(*stack1, *stack2);
-		// while (*stack1)
-		// {
-		// 	printf("number->%d, index->%d, above_median->%d, total_cost%d, target->%d\n", (*stack1)->data, (*stack1)->index, (*stack1)->above_median,
-		// 	(*stack1)->push_cost, (*stack1)->target->data);
-		// 	*stack1 = (*stack1)->next;
-		// }
-		// printf("stack2\n");
-		// while (*stack2)
-		// {
-		// 	printf("number->%d, index->%d, above_median->%d, total_cost%d\n", (*stack2)->data, (*stack2)->index, (*stack2)->above_median,
-		// 	(*stack2)->push_cost);
-		// 	*stack2 = (*stack2)->next;
-		// }
-		// exit(0);
 		push_to_b(stack1, stack2);
 	}
 	sort_three(stack1);
