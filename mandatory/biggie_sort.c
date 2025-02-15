@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   chunks.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yoayedde <yoayedde@student.42.fr>          #+#  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-14 19:51:47 by yoayedde          #+#    #+#             */
-/*   Updated: 2025-02-14 19:51:47 by yoayedde         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
 void	sort_em(t_stack **stack1, t_stack **stack2)
@@ -68,14 +56,12 @@ void	final_check(t_stack **stack)
 	}
 }
 
-void	cut_em(t_stack **stack1, t_stack **stack2, int chunk_size)
+void	cut_em(t_stack **stack1, t_stack **stack2, int chunk_size, int size)
 {
 	int	i;
 	int	direction;
-	int	size;
 
 	i = 0;
-	size = ft_ft_lstsize(*stack1);
 	direction = check_biggest_subsequence(*stack1);
 	update_index(*stack1);
 	while (*stack1)
@@ -107,7 +93,7 @@ void	chunk_em(t_stack **stack1, t_stack **stack2)
 	size = ft_ft_lstsize(*stack1);
 	if (size > 200)
 		chunk_size = 35;
-	cut_em(stack1, stack2, chunk_size);
+	cut_em(stack1, stack2, chunk_size, size);
 	sort_em(stack1, stack2);
 	final_check(stack1);
 }

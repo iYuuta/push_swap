@@ -87,7 +87,8 @@ t_stack	*ft_parse(int ac, char **av)
 				return (free_mem(args1), write(2, "Error\n", 6), NULL);
 			tmp = ft_ft_newlst(ft_atoi(args1[i][k], head));
 			if (!tmp)
-				return (clear_stack(head, NULL), free_mem(args1), write(2, "Error\n", 6), NULL);
+				return (clear_stack(head, NULL), free_mem(args1),
+					write(2, "Error\n", 6), NULL);
 			ft_ft_lstadd_back(&head, tmp);
 		}
 	}
