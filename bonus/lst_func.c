@@ -12,7 +12,7 @@ t_stack	*ft_ft_newlst(int content)
 	strc->above_median = 0;
 	strc->sorted_index = 0;
 	strc->next = NULL;
-	return (NULL);
+	return (strc);
 }
 
 void	ft_ft_lstadd_back(t_stack **lst, t_stack *node)

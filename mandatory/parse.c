@@ -102,7 +102,8 @@ t_stack	*ft_parse_em(int ac, char **av)
 			k++;
 		}
 	}
+	free_mem(args1);
 	if (!check_dup(head))
-		return (write(2, "Error\n", 6), NULL);
-	return (free_mem(args1), head);
+		return (clear_stack(head), write(2, "Error\n", 6), NULL);
+	return (head);
 }

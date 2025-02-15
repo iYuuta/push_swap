@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 	if (!stack1)
 		return (1);
 	if (!check_sorted(stack1))
-		return (0);
+		return (clear_stack(stack1), 0);
 	len = ft_ft_lstsize(stack1);
 	if (len == 2)
 		sa_sb(&stack1, "sa\n");

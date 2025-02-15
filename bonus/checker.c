@@ -97,7 +97,7 @@ int	main(int ac, char **av)
 	if (!stack1)
 		return (1);
 	if (!check_dup(stack1))
-		return (clear_stack(stack1, NULL), write(2, "Error\n", 6), 1);
+		return (clear_stack(stack1, NULL), write(2, "ErroR\n", 6), 1);
 	if (buffer_exe(&stack1, &stack2))
 		return (1);
 	if (ft_ft_lstsize(stack2) != 0 || check_if_sorted(stack1))
