@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yoayedde <yoayedde@student.42.fr>          #+#  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-14 21:28:46 by yoayedde          #+#    #+#             */
-/*   Updated: 2025-02-14 21:28:46 by yoayedde         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "checker.h"
 
 int	check_if_sorted(t_stack *stack)
@@ -44,4 +32,22 @@ int	check_move(char *str, char *move)
 	if (i == j)
 		return (1);
 	return (0);
+}
+
+void	free_mem(char ***ptr)
+{
+	int	i;
+	int	j;
+
+	if (ptr == NULL || *ptr == NULL)
+		return ;
+	i = -1;
+	while (ptr[++i])
+	{
+		j = -1;
+		while (ptr[i][++j])
+			free(ptr[i][j]);
+		free(ptr[i]);
+	}
+	free(ptr);
 }

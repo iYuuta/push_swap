@@ -1,9 +1,8 @@
 SRC = mandatory/lst_func.c mandatory/parse.c mandatory/push_swap.c mandatory/error_handeling.c \
-		mandatory/rules.c \
-		mandatory/lil_sort.c mandatory/utils.c \
-		mandatory/chunks.c
+		mandatory/rules.c mandatory/lil_sort.c mandatory/utils.c \
+		mandatory/biggie_sort.c
 
-BSRC = bonus/checker.c bonus/get_next_line_utils.c bonus/get_next_line.c \
+BSRC = bonus/checker.c bonus/get_next_line_utils.c bonus/get_next_line.c bonus/utils.c\
 		bonus/lst_func.c bonus/parse.c bonus/rules.c bonus/error_handeling.c
 
 LBFTSRC = libft/ft_strlen.c libft/ft_split.c libft/ft_substr.c libft/ft_strdup.c \

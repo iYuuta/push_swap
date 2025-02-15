@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yoayedde <yoayedde@student.42.fr>          #+#  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-14 19:47:48 by yoayedde          #+#    #+#             */
-/*   Updated: 2025-02-14 19:47:48 by yoayedde         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "checker.h"
 
 void	preform_move(int move, t_stack **stack1, t_stack **stack2)
@@ -78,6 +66,8 @@ int	buffer_exe(t_stack **stack1, t_stack **stack2)
 	while (str)
 	{
 		tmp = ft_ft_newlst(0);
+		if (!tmp)
+			return (free(str), clear_stack(*stack1, moves), 1);
 		ft_ft_lstadd_back(&moves, tmp);
 		if (!store_moves(tmp, str))
 			return (free(str), clear_stack(*stack1, moves), 1);
@@ -106,6 +96,8 @@ int	main(int ac, char **av)
 	stack1 = ft_parse(ac, av);
 	if (!stack1)
 		return (1);
+	if (!check_dup(stack1))
+		return (clear_stack(stack1, NULL), write(2, "Error\n", 6), 1);
 	if (buffer_exe(&stack1, &stack2))
 		return (1);
 	if (ft_ft_lstsize(stack2) != 0 || check_if_sorted(stack1))

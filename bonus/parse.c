@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yoayedde <yoayedde@student.42.fr>          #+#  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-14 19:48:22 by yoayedde          #+#    #+#             */
-/*   Updated: 2025-02-14 19:48:22 by yoayedde         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "checker.h"
 
 int	ft_atoi(const char *str, t_stack *stack)
@@ -39,24 +27,6 @@ int	ft_atoi(const char *str, t_stack *stack)
 		ft_error();
 	}
 	return (result * sign);
-}
-
-void	free_mem(char ***ptr)
-{
-	int	i;
-	int	j;
-
-	if (ptr == NULL || *ptr == NULL)
-		return ;
-	i = -1;
-	while (ptr[++i])
-	{
-		j = -1;
-		while (ptr[i][++j])
-			free(ptr[i][j]);
-		free(ptr[i]);
-	}
-	free(ptr);
 }
 
 int	check_sorted(t_stack *stack)
@@ -110,17 +80,17 @@ t_stack	*ft_parse(int ac, char **av)
 	args1 = get_args(ac, av);
 	while (args1[++i])
 	{
-		k = 0;
-		while (args1[i][k])
+		k = -1;
+		while (args1[i][++k])
 		{
 			if (ft_strlen(args1[i][k]) > 11)
 				return (free_mem(args1), write(2, "Error\n", 6), NULL);
 			tmp = ft_ft_newlst(ft_atoi(args1[i][k], head));
+			if (!tmp)
+				return (clear_stack(head, NULL), free_mem(args1), write(2, "Error\n", 6), NULL);
 			ft_ft_lstadd_back(&head, tmp);
-			k++;
 		}
 	}
-	if (!check_dup(head))
-		return (write(2, "Error\n", 6), NULL);
-	return (free_mem(args1), head);
+	free_mem(args1);
+	return (head);
 }

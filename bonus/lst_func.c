@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lst_func.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yoayedde <yoayedde@student.42.fr>          #+#  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-14 19:48:18 by yoayedde          #+#    #+#             */
-/*   Updated: 2025-02-14 19:48:18 by yoayedde         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "checker.h"
 
 t_stack	*ft_ft_newlst(int content)
@@ -24,7 +12,7 @@ t_stack	*ft_ft_newlst(int content)
 	strc->above_median = 0;
 	strc->sorted_index = 0;
 	strc->next = NULL;
-	return (strc);
+	return (NULL);
 }
 
 void	ft_ft_lstadd_back(t_stack **lst, t_stack *node)
